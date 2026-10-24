@@ -539,12 +539,12 @@ body { padding-bottom: calc(110px + env(safe-area-inset-bottom)); }
 @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('fonts/plex-sans-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/plex-mono-600-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 
-.pt { --sans: 'IBM Plex Sans', var(--font); --mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace; font-family: var(--sans); background: var(--surface); border-block: 1px solid var(--line); margin-inline: -16px; }
-.pt-cols { display: grid; grid-template-columns: 48px 48px 58px minmax(0, 1fr) 58px; column-gap: 4px; padding-inline: 10px; width: 100%; }
+.pt { --sans: 'IBM Plex Sans', var(--font); --mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace; font-family: var(--sans); background: var(--surface); border: 1px solid var(--line); border-radius: 22px; overflow: clip; }
+.pt-cols { display: grid; grid-template-columns: 40px 40px 50px minmax(0, 1fr) minmax(54px, max-content); column-gap: 4px; padding-inline: 8px; width: 100%; }
 .pt-th { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface-2); border-bottom: 1px solid var(--line); }
 .pt-h { display: flex; }
 .pt-h.r { justify-content: flex-end; }
-.pt-sort { min-height: 44px; display: inline-flex; align-items: center; gap: 1px; padding: 0; border: 0; background: none; font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: -.01em; white-space: nowrap; color: var(--muted); }
+.pt-sort { min-height: 44px; display: inline-flex; align-items: center; gap: 1px; padding: 0; border: 0; background: none; font-family: var(--sans); font-size: 11.5px; font-weight: 600; letter-spacing: -.01em; white-space: nowrap; color: var(--muted); }
 .pt-sort .ic { width: 11px; height: 11px; stroke-width: 2.6; transition: transform .15s; }
 .pt-sort.on { color: var(--ink); }
 .pt-sort.desc .ic { transform: rotate(180deg); }
@@ -570,14 +570,14 @@ body { padding-bottom: calc(110px + env(safe-area-inset-bottom)); }
 .pt-cat .ic, .pt-key .ic { width: 22px; height: 22px; }
 .pt-cat .mono { width: 22px; height: 22px; font-size: 12px; }
 .pt-cc { min-width: 0; }
-.pt-conc { display: block; font-size: 15px; font-weight: 600; line-height: 1.2; overflow-wrap: break-word; hyphens: auto; }
+.pt-conc { display: block; font-size: 14.5px; letter-spacing: -.01em; font-weight: 600; line-height: 1.2; overflow-wrap: break-word; hyphens: auto; }
 .pt-nota { display: block; font-size: 13px; font-weight: 600; margin-top: 3px; line-height: 1.2; }
 .pt-nota.danger { color: var(--danger); } .pt-nota.warn { color: var(--warn); } .pt-nota.ok { color: var(--ok); }
 .pt-amt { text-align: right; }
 .pt-amt b { display: block; font-family: var(--mono); font-size: 14.5px; font-weight: 600; letter-spacing: -.04em; }
 .pt-amt.done b { color: var(--muted); }
 .pt-amt small { display: block; font-family: var(--mono); font-size: 10.5px; color: var(--muted); letter-spacing: -.03em; }
-.pt-foot { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 14px 10px; border-top: 1px solid var(--line); background: var(--surface-2); }
+.pt-foot { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 14px 16px; border-top: 1px solid var(--line); background: var(--surface-2); }
 .pt-foot span { font-size: 14px; color: var(--muted); }
 .pt-foot b { font-family: var(--mono); font-size: 17px; font-weight: 600; letter-spacing: -.02em; }
 .pt-key { display: flex; flex-wrap: wrap; gap: 8px 16px; padding: 14px 4px 0; font-size: 13px; color: var(--muted); }
