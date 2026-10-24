@@ -481,7 +481,9 @@ function renderList(groups, caption, countText, emptyKind, baseEmpty) {
    Render maestro
    ========================================================= */
 function render() {
-  const isG = state.view === 'gastos';
+  const isG = state.view === 'gastos', isP = state.view === 'perfil';
+  ['.hero', '.list-head', '#list'].forEach(sel => { $(sel).hidden = isP; });
+  $('#perfil').hidden = !isP;
   $$('#view-switch .nav-btn').forEach(b => { if (b.dataset.view === state.view) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
   $('#month-label').disabled = !isG;
   $('.controls').hidden = true;
@@ -489,7 +491,11 @@ function render() {
   const addBtn = $('.nav-add'), addLabel = isG ? 'Agregar pago o abono' : 'Agregar meta o ahorro';
   addBtn.setAttribute('aria-label', addLabel); addBtn.title = addLabel;
 
-  if (isG) {
+  if (isP) {
+    $('#search-bar').hidden = true;
+    $('#month-text').textContent = 'Perfil';
+    renderPerfil();
+  } else if (isG) {
     const b = buildGastos();
     renderHeroGastos(b);
     renderMonthControls();
@@ -528,6 +534,7 @@ function closeSheet() {
   document.body.style.overflow = '';
   setInert(false);
   if (sheet.last && document.contains(sheet.last)) { try { sheet.last.focus({ preventScroll: true }); } catch (e) {} }
+  if (state.view === 'perfil') renderPerfil();
 }
 
 let toastTimer;
@@ -841,21 +848,24 @@ const ICO = {
 };
 const themeLabel = () => document.documentElement.dataset.theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro';
 
-function openMenu() {
-  sheet.ctx = { type: 'menu' };
+function renderPerfil() {
   const cfg = sync.getCfg();
-  openSheet('Ajustes', `<div class="menu">
-    <button type="button" class="menu-row" data-action="theme">
-      <svg class="ic i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
-      <svg class="ic i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-      <span><b id="menu-theme">${themeLabel()}</b></span>
-    </button>
-    <button type="button" class="menu-row" data-action="open-sync">${ICO.upload}<span><b>Sincronizar con Google Sheets</b><small>${cfg.last ? 'Última vez: ' + new Date(cfg.last).toLocaleString('es-MX', { dateStyle: 'medium', timeStyle: 'short' }) : 'Misma hoja de SecondBrain, otra pestaña; tú decides cuándo'}</small></span></button>
-    <button type="button" class="menu-row" data-action="open-import">${ICO.upload}<span><b>Importar datos</b><small>Archivo JSON o CSV (Excel)</small></span></button>
-    <button type="button" class="menu-row" data-action="export-json">${ICO.download}<span><b>Exportar JSON</b><small>Respaldo completo, con historial de abonos</small></span></button>
-    <button type="button" class="menu-row" data-action="export-csv">${ICO.download}<span><b>Exportar CSV</b><small>Para abrir en Excel</small></span></button>
-  </div>`);
-  sheet.panel.focus({ preventScroll: true });
+  $('#perfil').innerHTML = `
+    <h2 class="perfil-h">Apariencia</h2>
+    <div class="menu">
+      <button type="button" class="menu-row" data-action="theme">
+        <svg class="ic i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+        <svg class="ic i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <span><b id="menu-theme">${themeLabel()}</b></span>
+      </button>
+    </div>
+    <h2 class="perfil-h">Respaldo y datos</h2>
+    <div class="menu">
+      <button type="button" class="menu-row" data-action="open-sync">${ICO.upload}<span><b>Sincronizar con Google Sheets</b><small>${cfg.last ? 'Última vez: ' + new Date(cfg.last).toLocaleString('es-MX', { dateStyle: 'medium', timeStyle: 'short' }) : 'Misma hoja de SecondBrain, otra pestaña; tú decides cuándo'}</small></span></button>
+      <button type="button" class="menu-row" data-action="open-import">${ICO.upload}<span><b>Importar datos</b><small>Archivo JSON o CSV (Excel)</small></span></button>
+      <button type="button" class="menu-row" data-action="export-json">${ICO.download}<span><b>Exportar JSON</b><small>Respaldo completo, con historial de abonos</small></span></button>
+      <button type="button" class="menu-row" data-action="export-csv">${ICO.download}<span><b>Exportar CSV</b><small>Para abrir en Excel</small></span></button>
+    </div>`;
 }
 
 /* Dashboard de Gastos: atención inmediata, meta diaria, tres mosaicos de estado (filtran la lista)
@@ -1099,7 +1109,6 @@ document.addEventListener('click', async e => {
       if (lbl) lbl.textContent = themeLabel();
       break;
     }
-    case 'open-menu': openMenu(); break;
     case 'open-sync': openSync(); break;
     case 'sync-push': syncPush(); break;
     case 'sync-pull': syncPull(); break;

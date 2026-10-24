@@ -254,7 +254,7 @@ button { cursor: pointer; -webkit-tap-highlight-color: transparent; }
 @supports (backdrop-filter: blur(1px)) {
   .bottom-nav { background: color-mix(in srgb, var(--surface) 90%, transparent); backdrop-filter: blur(14px); }
 }
-.bottom-nav-inner { max-width: 600px; margin: 0 auto; height: 64px; display: grid; grid-template-columns: 1fr 88px 1fr; align-items: center; }
+.bottom-nav-inner { max-width: 600px; margin: 0 auto; height: 64px; display: grid; grid-template-columns: 1fr 88px 1fr 1fr; align-items: center; }
 .nav-btn { height: 100%; background: none; border: 0; color: var(--muted); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 14px; font-weight: 600; }
 .nav-btn[aria-current="page"] { color: var(--ink); font-weight: 700; }
 .nav-btn[aria-current="page"] .ic { stroke-width: 2.2; }
@@ -581,3 +581,8 @@ body { padding-bottom: calc(110px + env(safe-area-inset-bottom)); }
 .pt-key .ic { width: 18px; height: 18px; }
 .pt-key .mono { width: 18px; height: 18px; font-size: 10px; }
 @media (prefers-reduced-motion: reduce) { .pt-sort .ic { transition: none; } }
+
+/* Perfil: opciones de ajustes dentro de la barra de navegación */
+.perfil { padding-top: 8px; }
+.perfil-h { font-size: 14px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 18px 4px 6px; }
+.perfil .menu { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 6px; margin-top: 0; }
