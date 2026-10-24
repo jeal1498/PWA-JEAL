@@ -839,7 +839,21 @@ function kpiDashboard(base) {
     ${grupo.length ? `<p class="kpi-note">${dprox <= 0 ? 'Vence hoy' : `Vence en ${plural(dprox, 'día', 'días')}`}</p>` : ''}
     <div class="kpi-card kpi-meta"><span class="kpi-sec">META DIARIA PARA ESTAR AL DÍA</span><span class="kpi-meta-v">${meta}</span><span class="kpi-s">${isCurrentMonth() ? 'por día' : 'solo en el mes actual'}</span></div>
     <div class="kpi-legend">${tiles}</div>
-    <button type="button" class="kpi-card kpi-total" data-action="filter" data-filter="todos" aria-pressed="${state.filter === 'todos'}"><span class="kpi-main"><span class="kpi-sec">RESUMEN OPERATIVO</span><span class="kpi-s">${plural(base.length, 'pago registrado', 'pagos registrados')}</span></span><span class="kpi-aside"><span class="kpi-l">Total cartera</span><span class="kpi-v">${fmtMoney(totalImp)}</span></span></button>`;
+    <button type="button" class="kpi-card kpi-total" data-action="breakdown" aria-haspopup="dialog"><span class="kpi-main"><span class="kpi-sec">RESUMEN OPERATIVO</span><span class="kpi-s">${plural(base.length, 'pago registrado', 'pagos registrados')}</span></span><span class="kpi-aside"><span class="kpi-l">Total cartera</span><span class="kpi-v">${fmtMoney(totalImp)}</span></span></button>`;
+}
+
+/* Desglose de todos los pagos del mes (sin filtros), con totales. */
+function openBreakdown() {
+  sheet.ctx = { type: 'breakdown' };
+  const base = movimientos.map(procesar)
+    .filter(m => m.date.getFullYear() === state.month.year && m.date.getMonth() === state.month.month)
+    .sort((a, c) => a.date - c.date);
+  const body = base.length
+    ? `<div class="kpi-card kpi-total"><span class="kpi-main"><span class="kpi-sec">TOTAL DEL MES</span><span class="kpi-s">Pagado ${fmtMoney(sum(base, 'abo'))} · Pendiente ${fmtMoney(sum(base, 'pendiente'))}</span></span><span class="kpi-aside"><span class="kpi-l">Total cartera</span><span class="kpi-v">${fmtMoney(sum(base, 'imp'))}</span></span></div>
+       <div class="list">${base.map(m => gastoRow(m, true)).join('')}</div>`
+    : '<p class="note">No hay pagos registrados en este mes.</p>';
+  openSheet(`Pagos de ${MESES[state.month.month]} ${state.month.year} (${base.length})`, body);
+  sheet.panel.focus({ preventScroll: true });
 }
 
 /* Sincronización manual con la hoja de Google que ya usa SecondBrain (mismo script y archivo, otras pestañas). */
@@ -1087,6 +1101,7 @@ document.addEventListener('click', async e => {
     case 'month-picker': openMonthPicker(); break;
     case 'pick-month': state.month = { year: +t.dataset.year, month: +t.dataset.month }; closeSheet(); render(); break;
     case 'pick-today': state.month = { year: HOY.getFullYear(), month: HOY.getMonth() }; closeSheet(); render(); break;
+    case 'breakdown': openBreakdown(); break;
     case 'filter': state.filter = t.dataset.filter; render(); break;
     case 'toggle-group': {
       const sec = t.closest('.group');
