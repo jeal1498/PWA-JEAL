@@ -34,10 +34,6 @@
         <span id="month-text"></span>
       </button>
     </div>
-    <div class="view-switch" id="view-switch" role="group" aria-label="Ver">
-      <button type="button" data-action="view" data-view="gastos" aria-pressed="true">Pagos</button>
-      <button type="button" data-action="view" data-view="metas" aria-pressed="false">Metas</button>
-    </div>
   </header>
 
   <main>
@@ -72,10 +68,18 @@
   </main>
 </div>
 
-<nav class="bottom-nav" aria-label="Agregar">
-  <button type="button" class="nav-add" data-action="add" aria-label="Agregar">
-    <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-  </button>
+<nav class="bottom-nav" aria-label="Secciones">
+  <div class="bottom-nav-inner" id="view-switch">
+    <button type="button" class="nav-btn" data-action="view" data-view="gastos" aria-current="page">
+      <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19M6.5 15h4"/></svg>Pagos
+    </button>
+    <button type="button" class="nav-add" data-action="add" aria-label="Agregar">
+      <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
+    <button type="button" class="nav-btn" data-action="view" data-view="metas">
+      <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Metas
+    </button>
+  </div>
 </nav>
 
 <div class="sheet-backdrop" id="sheet" data-action="backdrop" hidden>

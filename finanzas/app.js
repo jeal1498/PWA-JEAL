@@ -482,7 +482,7 @@ function renderList(groups, caption, countText, emptyKind, baseEmpty) {
    ========================================================= */
 function render() {
   const isG = state.view === 'gastos';
-  $$('#view-switch button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === state.view)));
+  $$('#view-switch .nav-btn').forEach(b => { if (b.dataset.view === state.view) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
   $('#month-label').disabled = !isG;
   $('.controls').hidden = true;
   $('#seg').hidden = true;

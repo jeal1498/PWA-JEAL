@@ -446,11 +446,13 @@ input[aria-invalid="true"] { border-color: var(--danger); }
 .btn-primary { background: var(--accent); color: var(--on-accent); }
 .nav-add { background: var(--accent); color: var(--on-accent); box-shadow: 0 10px 24px -8px color-mix(in srgb, var(--accent) 60%, transparent); }
 
-/* Barra inferior plana con botón + flotante a la derecha */
-.bottom-nav-inner { grid-template-columns: 1fr 1fr; padding: 0 40px; }
-.nav-add { position: fixed; right: max(20px, calc(50% - 280px)); bottom: calc(86px + env(safe-area-inset-bottom)); width: 58px; height: 58px; margin: 0; border: 0; }
-.toast { bottom: calc(160px + env(safe-area-inset-bottom)); }
-body { padding-bottom: calc(150px + env(safe-area-inset-bottom)); }
+/* Barra inferior: Pagos | + | Metas */
+.toast { bottom: calc(100px + env(safe-area-inset-bottom)); }
+body { padding-bottom: calc(110px + env(safe-area-inset-bottom)); }
+.nav-btn { font-size: 13px; position: relative; }
+.nav-btn .ic { width: 24px; height: 24px; stroke-width: 1.8; }
+.nav-btn[aria-current="page"]::before { content: ""; position: absolute; top: 0; left: 28%; right: 28%; height: 3px; border-radius: 0 0 3px 3px; background: var(--accent); }
+.nav-add { margin-top: -30px; }
 
 /* Resumen: cifra grande con su nota y tres cifras en una fila */
 .hero-main { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
@@ -514,12 +516,6 @@ body { padding-bottom: calc(150px + env(safe-area-inset-bottom)); }
 .hp-label { min-height: 56px; width: 100%; justify-content: center; font-size: 30px; }
 .header-title-row h1 { font-size: 30px; }
 
-/* Una sola pantalla: interruptor Pagos | Metas y botón + flotante sin barra */
-.view-switch { display: flex; gap: 4px; padding: 4px; border-radius: 18px; background: var(--surface-2); margin-top: 4px; }
-.view-switch button { flex: 1; height: 44px; border: 0; border-radius: 14px; background: none; color: var(--muted); font-size: 16px; font-weight: 700; }
-.view-switch button[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); }
-.bottom-nav { background: none; border: 0; box-shadow: none; backdrop-filter: none; height: 0; pointer-events: none; }
-.bottom-nav .nav-add { pointer-events: auto; }
 .hp-label:disabled { cursor: default; }
 :root { --meta: #6b4fd6; --meta-bg: #ece6ff; }
 :root[data-theme="dark"] { --meta: #b9a3ff; --meta-bg: #241f3a; }
