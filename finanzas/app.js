@@ -431,20 +431,19 @@ const BADGE_ICON = {
 const BADGE_TONE = { Vencido: 'danger', Pendiente: 'warn', Pagado: 'ok' };
 
 function diasTexto(m, i) {
-  if (m.estado === 'Pagado') return 'Pagado completo';
-  if (m.estado === 'Vencido') { const n = -daysFromToday(m.date); return `${plural(n, 'día atrasado', 'días atrasados')}`; }
+  if (m.estado === 'Pagado') return '';
+  if (m.estado === 'Vencido') return plural(-daysFromToday(m.date), 'día atrasado', 'días atrasados');
   return i.text;
 }
 
 function pagoRow(m) {
-  const i = gastoInfo(m), c = catOf(m.cat), t = BADGE_TONE[m.estado];
+  const i = gastoInfo(m), c = catOf(m.cat), t = BADGE_TONE[m.estado], dias = diasTexto(m, i);
   return `<button type="button" class="pt-cols pt-row${m.estado === 'Vencido' ? ' v' : ''}" data-action="open" data-kind="gasto" data-id="${esc(m.id)}">
-    <span class="pt-fecha">${m.date.getDate()}<small>${MESES_CORTO[m.date.getMonth()]}</small></span>
-    <span class="pt-badge ${t}">${svg(BADGE_ICON[m.estado])}${m.estado}</span>
-    <span class="pt-cat">${esc(c.id)}</span>
-    <span class="pt-conc">${esc(m.conc)}</span>
+    <span class="pt-fecha"><b>${m.date.getDate()}</b><small>${MESES_CORTO[m.date.getMonth()]}</small></span>
+    <span class="pt-est ${t}" role="img" aria-label="${m.estado}" title="${m.estado}">${svg(BADGE_ICON[m.estado])}</span>
+    <span class="pt-cat" role="img" aria-label="${esc(c.id)}" title="${esc(c.id)}">${catIcon(c)}</span>
+    <span class="pt-cc"><span class="pt-conc">${esc(m.conc)}</span>${dias || i.partial ? `<span class="pt-nota ${t}">${dias}${i.partial ? `<span class="pt-bar"><span style="width:${i.pct}%"></span></span>` : ''}</span>` : ''}</span>
     <span class="pt-amt${i.done ? ' done' : ''}"><b>${fmtMoney(i.done ? m.imp : i.pend)}</b>${i.partial ? `<small>de ${fmtMoney(m.imp)}</small>` : ''}</span>
-    <span class="pt-nota ${t}">${diasTexto(m, i)}${i.partial ? `<span class="pt-bar"><span style="width:${i.pct}%"></span></span>` : ''}</span>
   </button>`;
 }
 
@@ -456,7 +455,9 @@ function pagosTable(b) {
     return `<span class="pt-h${k === 'monto' ? ' r' : ''}"><button type="button" class="pt-sort${on ? ' on' : ''}${on && !asc ? ' desc' : ''}" data-action="sort" data-col="${k}" aria-label="Ordenar por ${l.toLowerCase()}${on ? (asc ? ', de menor a mayor' : ', de mayor a menor') : ''}">${l}${on ? svg('<path d="m6 15 6-6 6 6"/>') : ''}</button></span>`;
   }).join('');
   const pend = sum(items, 'pendiente');
-  return `<div class="pt"><div class="pt-cols pt-th">${head}</div>${items.map(pagoRow).join('')}<div class="pt-foot"><span>${plural(items.length, 'pago', 'pagos')} · por pagar</span><b>${fmtMoney(pend)}</b></div></div>`;
+  const cats = [...new Map(items.map(m => [catOf(m.cat).id, catOf(m.cat)])).values()].sort((a, c) => a.id.localeCompare(c.id, 'es'));
+  return `<div class="pt"><div class="pt-cols pt-th">${head}</div>${items.map(pagoRow).join('')}<div class="pt-foot"><span>${plural(items.length, 'pago', 'pagos')} · por pagar</span><b>${fmtMoney(pend)}</b></div></div>
+    <div class="pt-key" aria-label="Categorías">${cats.map(c => `<span>${catIcon(c)}${esc(c.id)}</span>`).join('')}</div>`;
 }
 
 function renderPagos(b) {
