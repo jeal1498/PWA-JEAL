@@ -100,7 +100,8 @@ const state = {
   grouping: lsGet(KEYS.group) === 'urgencia' ? 'urgencia' : 'categoria',
   month: { year: HOY.getFullYear(), month: HOY.getMonth() },
   open: {},
-  search: ''
+  search: '',
+  sort: { col: 'fecha', asc: true }
 };
 const isCurrentMonth = () => state.month.year === HOY.getFullYear() && state.month.month === HOY.getMonth();
 
@@ -412,6 +413,59 @@ function groupsMetas(b) {
   return out;
 }
 
+/* Pagos como tabla: columnas ordenables (un toque asc., otro desc.), vencidos teñidos y días debajo de cada pago. */
+const ESTADO_ORD = { Vencido: 0, Pendiente: 1, Pagado: 2 };
+const SORTS = {
+  fecha:   (a, c) => a.date - c.date,
+  estatus: (a, c) => ESTADO_ORD[a.estado] - ESTADO_ORD[c.estado],
+  cat:     (a, c) => catOf(a.cat).id.localeCompare(catOf(c.cat).id, 'es'),
+  conc:    (a, c) => a.conc.localeCompare(c.conc, 'es'),
+  monto:   (a, c) => a.imp - c.imp
+};
+const COLS = [['fecha', 'Fecha'], ['estatus', 'Estatus'], ['cat', 'Categoría'], ['conc', 'Concepto'], ['monto', 'Monto']];
+const BADGE_ICON = {
+  Vencido: '<path d="M12 3 2.5 20h19z"/><path d="M12 10v4.5M12 17.5v.01"/>',
+  Pendiente: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  Pagado: '<path d="m5 12.5 4.5 4.5L19 7.5"/>'
+};
+const BADGE_TONE = { Vencido: 'danger', Pendiente: 'warn', Pagado: 'ok' };
+
+function diasTexto(m, i) {
+  if (m.estado === 'Pagado') return 'Pagado completo';
+  if (m.estado === 'Vencido') { const n = -daysFromToday(m.date); return `${plural(n, 'día atrasado', 'días atrasados')}`; }
+  return i.text;
+}
+
+function pagoRow(m) {
+  const i = gastoInfo(m), c = catOf(m.cat), t = BADGE_TONE[m.estado];
+  return `<button type="button" class="pt-cols pt-row${m.estado === 'Vencido' ? ' v' : ''}" data-action="open" data-kind="gasto" data-id="${esc(m.id)}">
+    <span class="pt-fecha">${m.date.getDate()}<small>${MESES_CORTO[m.date.getMonth()]}</small></span>
+    <span class="pt-badge ${t}">${svg(BADGE_ICON[m.estado])}${m.estado}</span>
+    <span class="pt-cat">${esc(c.id)}</span>
+    <span class="pt-conc">${esc(m.conc)}</span>
+    <span class="pt-amt${i.done ? ' done' : ''}"><b>${fmtMoney(i.done ? m.imp : i.pend)}</b>${i.partial ? `<small>de ${fmtMoney(m.imp)}</small>` : ''}</span>
+    <span class="pt-nota ${t}">${diasTexto(m, i)}${i.partial ? `<span class="pt-bar"><span style="width:${i.pct}%"></span></span>` : ''}</span>
+  </button>`;
+}
+
+function pagosTable(b) {
+  const { col, asc } = state.sort;
+  const items = [...b.items].sort((a, c) => (SORTS[col](a, c) || porFechaYMonto(a, c)) * (asc ? 1 : -1));
+  const head = COLS.map(([k, l]) => {
+    const on = col === k;
+    return `<span class="pt-h${k === 'monto' ? ' r' : ''}"><button type="button" class="pt-sort${on ? ' on' : ''}${on && !asc ? ' desc' : ''}" data-action="sort" data-col="${k}" aria-label="Ordenar por ${l.toLowerCase()}${on ? (asc ? ', de menor a mayor' : ', de mayor a menor') : ''}">${l}${on ? svg('<path d="m6 15 6-6 6 6"/>') : ''}</button></span>`;
+  }).join('');
+  const pend = sum(items, 'pendiente');
+  return `<div class="pt"><div class="pt-cols pt-th">${head}</div>${items.map(pagoRow).join('')}<div class="pt-foot"><span>${plural(items.length, 'pago', 'pagos')} · por pagar</span><b>${fmtMoney(pend)}</b></div></div>`;
+}
+
+function renderPagos(b) {
+  $('#list-caption').textContent = 'Pagos';
+  $('#list-count').textContent = `${plural(b.items.length, 'movimiento', 'movimientos')} · toca una columna para ordenar`;
+  if (b.items.length) { $('#list').innerHTML = pagosTable(b); return; }
+  renderList([], '', '', 'gastos', b.base.length === 0);
+}
+
 function renderList(groups, caption, countText, emptyKind, baseEmpty) {
   $('#list-caption').textContent = caption;
   $('#list-count').textContent = countText;
@@ -430,7 +484,7 @@ function render() {
   $$('#view-switch button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === state.view)));
   $('#month-label').disabled = !isG;
   $('.controls').hidden = true;
-  $('#seg').hidden = !isG;
+  $('#seg').hidden = true;
   const addBtn = $('.nav-add'), addLabel = isG ? 'Agregar pago o abono' : 'Agregar meta o ahorro';
   addBtn.setAttribute('aria-label', addLabel); addBtn.title = addLabel;
 
@@ -438,7 +492,7 @@ function render() {
     const b = buildGastos();
     renderHeroGastos(b);
     renderMonthControls();
-    renderList(groupsGastos(b), b.isUrg ? 'Por urgencia' : 'Por categoría', plural(b.items.length, 'movimiento', 'movimientos'), 'gastos', b.base.length === 0);
+    renderPagos(b);
   } else {
     const b = buildMetas();
     renderHeroMetas(b);
@@ -595,7 +649,7 @@ async function finish(kind, raw, msg) {
   reveal(kind, raw);
   closeSheet();
   render();
-  const row = $$('.row').find(r => r.dataset.id === raw.id);
+  const row = $$('.row, .pt-row').find(r => r.dataset.id === raw.id);
   if (row) { row.scrollIntoView({ block: 'center', behavior: 'smooth' }); row.classList.add('flash'); }
   toast(ok ? msg : 'No se pudo guardar en este dispositivo');
 }
@@ -1102,6 +1156,7 @@ document.addEventListener('click', async e => {
     case 'pick-month': state.month = { year: +t.dataset.year, month: +t.dataset.month }; closeSheet(); render(); break;
     case 'pick-today': state.month = { year: HOY.getFullYear(), month: HOY.getMonth() }; closeSheet(); render(); break;
     case 'breakdown': openBreakdown(); break;
+    case 'sort': { const k = t.dataset.col; state.sort = { col: k, asc: state.sort.col === k ? !state.sort.asc : true }; render(); break; }
     case 'filter': state.filter = t.dataset.filter; render(); break;
     case 'toggle-group': {
       const sec = t.closest('.group');
