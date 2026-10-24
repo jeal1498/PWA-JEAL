@@ -38,13 +38,20 @@ async function load() {
     if (!projects.some((p) => p.id === 'proj-finanzas')) {
       const p = { id: 'proj-finanzas', name: 'Finanzas', emoji: '💰', status: 'activo', pinned: true,
         description: 'Pagos con abonos y metas de ahorro: meta diaria, gráfica de cuándo caen los pagos y grupos por urgencia.',
-        links: 'Abrir Finanzas ./finanzas/\nCarpeta del repo https://github.com/jeal1498/JEAL/tree/main/finanzas',
+        links: 'Abrir Finanzas https://jeal1498.github.io/PWA-Finance/\nRepositorio https://github.com/jeal1498/PWA-Finance',
         tags: 'app, dinero', notes: 'Datos en el teléfono (movimientos y metas); entran al respaldo y al buscador.', createdAt: Date.now(), updatedAt: Date.now() };
       await db.put('projects', p);
       projects.push(p);
     }
     await db.setSetting('seeds', [...seeds, 'proj-finanzas']);
     seeds.push('proj-finanzas');
+  }
+  // Finanzas se movió a su propio repo (24-oct): actualiza los accesos del proyecto ya sembrado.
+  const fin = projects.find((p) => p.id === 'proj-finanzas');
+  if (fin && /\.\/finanzas\/|JEAL\/tree\/main\/finanzas/.test(fin.links || '')) {
+    fin.links = 'Abrir Finanzas https://jeal1498.github.io/PWA-Finance/\nRepositorio https://github.com/jeal1498/PWA-Finance';
+    fin.updatedAt = Date.now();
+    await db.put('projects', fin);
   }
   // Cerebro (23-oct): segundo cerebro centrado en captura; vive en cerebro/ y se abre desde Proyectos.
   if (!seeds.includes('proj-cerebro-app')) {
@@ -493,8 +500,8 @@ function setFab(store) {
 
 function render() {
   const [, mod, sub = ''] = (location.hash || '#/').slice(1).split('/');
-  // Finanzas es ahora una página aparte (finanzas/); los enlaces viejos #/finanzas llevan ahí.
-  if (mod === 'finanzas') { location.replace('finanzas/'); return; }
+  // Finanzas es ahora un repo aparte (PWA-Finance); los enlaces viejos #/finanzas llevan ahí.
+  if (mod === 'finanzas') { location.replace('https://jeal1498.github.io/PWA-Finance/'); return; }
   window.scrollTo(0, 0);
   if (mod === 'vehiculo') renderVehicle(sub);
   else if (mod === 'respaldo') renderBackup();
@@ -576,8 +583,8 @@ const SEARCH = [
   { store: 'maintenance', label: 'Servicio', icon: 'wrench', show: (x) => ({ title: x.type || 'Servicio', amount: x.cost }) },
   { store: 'expenses', label: 'Gastos del vehículo', icon: 'receipt', show: (x) => ({ title: x.category || 'Gasto', amount: x.amount }) },
   { store: 'reminders', label: 'Avisos', icon: 'bell', show: (x) => ({ title: x.title, date: x.lastDate }) },
-  { store: 'movimientos', label: 'Pagos', icon: 'calendar', show: (x) => ({ title: `${catEmoji(x.cat)} ${x.conc}`, amount: x.imp, date: x.fecha }), open: (x) => { location.href = 'finanzas/#gasto-' + encodeURIComponent(x.id); } },
-  { store: 'metas', label: 'Metas', icon: 'target', show: (x) => ({ title: `${catEmoji(x.cat)} ${x.conc}`, amount: x.imp, date: x.fecha }), open: (x) => { location.href = 'finanzas/#meta-' + encodeURIComponent(x.id); } },
+  { store: 'movimientos', label: 'Pagos', icon: 'calendar', show: (x) => ({ title: `${catEmoji(x.cat)} ${x.conc}`, amount: x.imp, date: x.fecha }), open: (x) => { location.href = 'https://jeal1498.github.io/PWA-Finance/#gasto-' + encodeURIComponent(x.id); } },
+  { store: 'metas', label: 'Metas', icon: 'target', show: (x) => ({ title: `${catEmoji(x.cat)} ${x.conc}`, amount: x.imp, date: x.fecha }), open: (x) => { location.href = 'https://jeal1498.github.io/PWA-Finance/#meta-' + encodeURIComponent(x.id); } },
   { store: 'notes', label: 'Notas', icon: 'note', show: (x) => ({ title: x.title, sub: x.body }) },
   { store: 'projects', label: 'Proyectos', icon: 'folder', show: (x) => ({ title: `${x.emoji || ''} ${x.name}`.trim(), sub: x.description }) },
   { store: 'tasks', label: 'Pendientes', icon: 'tasks', show: (x) => ({ title: (x.done ? '✓ ' : '') + x.title, date: x.due }) },
