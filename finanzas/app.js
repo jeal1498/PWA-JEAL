@@ -440,9 +440,9 @@ function pagoRow(m) {
   const i = gastoInfo(m), c = catOf(m.cat), t = BADGE_TONE[m.estado], dias = diasTexto(m, i);
   return `<button type="button" class="pt-cols pt-row${m.estado === 'Vencido' ? ' v' : ''}" data-action="open" data-kind="gasto" data-id="${esc(m.id)}">
     <span class="pt-fecha"><b>${m.date.getDate()}</b><small>${MESES_CORTO[m.date.getMonth()]}</small></span>
-    <span class="pt-est ${t}" role="img" aria-label="${m.estado}" title="${m.estado}">${svg(BADGE_ICON[m.estado])}</span>
+    <span class="pt-est ${t}" role="img" aria-label="${m.estado}${i.partial ? `, abonado ${i.pct}%` : ''}" title="${m.estado}${i.partial ? `, abonado ${i.pct}%` : ''}">${i.partial ? `<svg class="ring" viewBox="0 0 24 24" aria-hidden="true"><circle class="tr" cx="12" cy="12" r="9" pathLength="100"/><circle class="pr" cx="12" cy="12" r="9" pathLength="100" style="--p:${i.pct}"/></svg>` : svg(BADGE_ICON[m.estado])}</span>
     <span class="pt-cat" role="img" aria-label="${esc(c.id)}" title="${esc(c.id)}">${catIcon(c)}</span>
-    <span class="pt-cc"><span class="pt-conc">${esc(m.conc)}</span>${dias || i.partial ? `<span class="pt-nota ${t}">${dias}${i.partial ? `<span class="pt-bar"><span style="width:${i.pct}%"></span></span>` : ''}</span>` : ''}</span>
+    <span class="pt-cc"><span class="pt-conc">${esc(m.conc)}</span>${dias ? `<span class="pt-nota ${t}">${dias}</span>` : ''}</span>
     <span class="pt-amt${i.done ? ' done' : ''}"><b>${fmtMoney(i.done ? m.imp : i.pend)}</b>${i.partial ? `<small>de ${fmtMoney(m.imp)}</small>` : ''}</span>
   </button>`;
 }
@@ -1074,7 +1074,7 @@ function setGrouping(g) {
   /* Aviso de una sola vez: ya no hay flechas, el mes se cambia deslizando. */
   if (!lsGet(KEYS.hint)) {
     lsSet(KEYS.hint, '1');
-    toast('Desliza a los lados para cambiar de mes');
+    toast('Desliza sobre el mes para cambiar de mes');
   }
 }
 
@@ -1246,7 +1246,7 @@ document.addEventListener('keydown', e => {
 /* Swipe horizontal para cambiar de mes (gastos agrupados por categoría) */
 (() => {
   let sx = 0, sy = 0, t0 = 0, tracking = false;
-  const zone = el => el && el.closest && el.closest('.hero, .list-head, #list');
+  const zone = el => el && el.closest && el.closest('.header-title-row');
   document.addEventListener('touchstart', e => {
     tracking = e.touches.length === 1 && !!zone(e.target);
     if (!tracking) return;
