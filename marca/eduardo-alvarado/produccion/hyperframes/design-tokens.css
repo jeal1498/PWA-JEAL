@@ -1,0 +1,94 @@
+/* EA — Design tokens for HyperFrames compositions
+   Brand reference: identidad visual V2 aprobada.
+   Load fonts locally in production when licensed font files are available.
+*/
+:root {
+  --ea-black: #171717;
+  --ea-orange: #F57C00;
+  --ea-ivory: #F4F1EA;
+  --ea-gray: #77736D;
+
+  --ea-font-display: "Montserrat", sans-serif;
+  --ea-font-body: "Roboto", sans-serif;
+
+  --ea-safe-x: 72px;
+  --ea-safe-top: 180px;
+  --ea-safe-bottom: 260px;
+
+  --ea-title-size: 76px;
+  --ea-subtitle-size: 42px;
+  --ea-label-size: 28px;
+
+  --ea-motion-fast: 180ms;
+  --ea-motion-standard: 320ms;
+  --ea-motion-slow: 520ms;
+
+  --ea-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ea-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Shared baseline for portrait social-video compositions. */
+.ea-video {
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  position: relative;
+  background: var(--ea-black);
+  color: var(--ea-ivory);
+  font-family: var(--ea-font-body);
+}
+
+.ea-display {
+  font-family: var(--ea-font-display);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+.ea-body {
+  font-family: var(--ea-font-body);
+  font-weight: 400;
+}
+
+.ea-accent {
+  color: var(--ea-orange);
+}
+
+.ea-safe-area {
+  position: absolute;
+  left: var(--ea-safe-x);
+  right: var(--ea-safe-x);
+  top: var(--ea-safe-top);
+  bottom: var(--ea-safe-bottom);
+  pointer-events: none;
+}
+
+.ea-caption {
+  max-width: 900px;
+  font-family: var(--ea-font-body);
+  font-size: var(--ea-subtitle-size);
+  font-weight: 700;
+  line-height: 1.16;
+  text-wrap: balance;
+  color: var(--ea-ivory);
+  text-shadow: 0 2px 12px rgb(0 0 0 / 45%);
+}
+
+.ea-caption__highlight {
+  color: var(--ea-orange);
+}
+
+.ea-kicker {
+  font-family: var(--ea-font-body);
+  font-size: var(--ea-label-size);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ea-orange);
+}
+
+.ea-signature {
+  font-family: var(--ea-font-display);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
