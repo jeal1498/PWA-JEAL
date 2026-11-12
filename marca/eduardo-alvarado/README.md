@@ -100,12 +100,20 @@ Priorizar demostraciones antes/después, consejos, procesos, errores frecuentes 
 - [ ] Validar los tres SVG en tamaños reales de uso y corregir cualquier diferencia geométrica con la lámina.
 - [ ] Crear versiones PNG transparentes del logotipo y la marca de agua.
 - [ ] Sustituir el retrato ilustrativo por una fotografía real.
-- [ ] Preparar plantillas editables de avatar, portada y marca de agua.
-- [ ] Definir estilo de subtítulos, rótulos y motion graphics.
+- [ ] Preparar exportaciones PNG de los recursos y validar su uso en CapCut.
+- [x] Crear plantillas editables de portada TikTok, subtítulos, rótulos y elementos gráficos.
 - [ ] Elegir usuario de TikTok y publicar la bio.
 - [ ] Producir los primeros 10 videos.
 - [ ] Definir proceso de contacto, cotización y contratación.
 
-## 8. Regla de consistencia
+## 8. Plantillas TikTok
+
+- [Plantilla base de portada 9:16](plantillas/tiktok/portada-tiktok-base.svg)
+- [Sistema de subtítulos y elementos gráficos](plantillas/tiktok/elementos-graficos-ea.svg)
+- [Guía de uso](plantillas/tiktok/GUIA-DE-USO.md)
+
+Las plantillas mantienen Montserrat/Roboto y la paleta oficial. Los SVG son editables y están pensados para adaptar en Figma, Illustrator, Inkscape o reconstruir en CapCut.
+
+## 9. Regla de consistencia
 
 El nombre principal siempre será **Eduardo Alvarado**. EA. es un recurso gráfico secundario y no sustituye el nombre de marca. Mantener paleta, tipografías, jerarquía y estilo editorial en todas las aplicaciones.
