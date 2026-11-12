@@ -1,11 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 270" role="img" aria-labelledby="title desc">
   <title id="title">EA. — Marca de agua</title>
-  <g fill="#FFFFFF">
-    <path d="M18 22h45v12H33v13h27v11H33v15h32v12H18z"/>
-    <path d="m67 85 23-63h16l23 63h-15l-5-15H87l-5 15zm24-27h14l-7-20z"/>
+  <desc id="desc">Monograma EA simplificado en blanco con triángulo de reproducción y punto naranja. Fondo transparente.</desc>
+  <g transform="translate(42 22) scale(.94)">
+    <path fill="#FFFFFF" d="M0 0H345L324 43H81V91H278L258 132H81V181H299L278 224H0Z"/>
+    <path fill="#FFFFFF" d="M286 224 386 0H461L574 224H489L431 98 389 224Z"/>
+    <path fill="#F57C00" d="M367 144 421 178 367 211Z"/>
+    <circle cx="605" cy="207" r="31" fill="#F57C00"/>
   </g>
-  <path d="m98 39 12 8-12 8z" fill="#F57C00"/>
-  <circle cx="137" cy="75" r="5" fill="#F57C00"/>
-  <text x="160" y="56" fill="#FFFFFF" font-family="Montserrat, Arial, sans-serif" font-size="24" font-weight="800">EDUARDO</text>
-  <text x="160" y="83" fill="#FFFFFF" font-family="Montserrat, Arial, sans-serif" font-size="24" font-weight="800">ALVARADO.</text>
 </svg>
