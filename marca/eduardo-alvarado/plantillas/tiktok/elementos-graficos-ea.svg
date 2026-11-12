@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" role="img" aria-labelledby="title desc">
+  <title id="title">Sistema de subtítulos y elementos gráficos EA</title>
+  <desc id="desc">Lámina de componentes transparentes para superponer en video: subtítulo principal, palabra destacada, lower third, etiqueta y llamada breve.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8"/>
+      <feOffset dy="5"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".42"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Cada grupo puede exportarse por separado como PNG transparente o recrearse en el editor -->
+  <g id="subtitle-main" filter="url(#shadow)">
+    <rect x="100" y="1260" width="880" height="142" rx="18" fill="#171717" fill-opacity=".88"/>
+    <rect x="100" y="1260" width="12" height="142" rx="6" fill="#F57C00"/>
+    <text x="150" y="1350" fill="#F4F1EA" font-family="Montserrat, Arial, sans-serif" font-size="56" font-weight="800">SUBTÍTULO PRINCIPAL</text>
+  </g>
+  <g id="subtitle-highlight" filter="url(#shadow)">
+    <rect x="245" y="1450" width="590" height="110" rx="12" fill="#F57C00"/>
+    <text x="540" y="1522" text-anchor="middle" fill="#171717" font-family="Montserrat, Arial, sans-serif" font-size="52" font-weight="900">PALABRA CLAVE</text>
+  </g>
+  <g id="lower-third" filter="url(#shadow)">
+    <rect x="96" y="1640" width="620" height="148" rx="12" fill="#171717" fill-opacity=".94"/>
+    <rect x="96" y="1640" width="12" height="148" fill="#F57C00"/>
+    <text x="140" y="1704" fill="#F4F1EA" font-family="Montserrat, Arial, sans-serif" font-size="39" font-weight="800">NOMBRE / TEMA</text>
+    <text x="140" y="1752" fill="#F4F1EA" fill-opacity=".72" font-family="Roboto, Arial, sans-serif" font-size="25">Descripción corta o contexto</text>
+  </g>
+  <g id="tag" filter="url(#shadow)">
+    <rect x="96" y="180" width="320" height="66" rx="8" fill="#F57C00"/>
+    <text x="122" y="225" fill="#171717" font-family="Montserrat, Arial, sans-serif" font-size="27" font-weight="900" letter-spacing="2">TIP DE EDICIÓN</text>
+  </g>
+  <g id="callout" filter="url(#shadow)">
+    <path d="M710 410H984V548H710L670 480Z" fill="#F4F1EA"/>
+    <text x="845" y="468" text-anchor="middle" fill="#171717" font-family="Montserrat, Arial, sans-serif" font-size="28" font-weight="800">ANTES</text>
+    <text x="845" y="512" text-anchor="middle" fill="#F57C00" font-family="Montserrat, Arial, sans-serif" font-size="30" font-weight="900">/ DESPUÉS</text>
+  </g>
+  <g id="brand-signature" transform="translate(820 1780)">
+    <circle cx="70" cy="54" r="52" fill="#171717" fill-opacity=".9" stroke="#F57C00" stroke-width="5"/>
+    <text x="70" y="68" text-anchor="middle" fill="#F4F1EA" font-family="Montserrat, Arial, sans-serif" font-size="35" font-weight="900">EA<tspan fill="#F57C00">.</tspan></text>
+  </g>
+</svg>
