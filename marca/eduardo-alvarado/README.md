@@ -2,7 +2,7 @@
 
 > Documento de trabajo. Esta identidad corresponde a la marca personal de Eduardo Alvarado y es independiente de Clientela y de las demás marcas/documentos que existan en `/marca`.
 
-**Estado:** estrategia acordada e identidad visual V2 aprobada; archivos maestros y aplicaciones finales pendientes.  
+**Estado:** identidad visual V2 aprobada; tres SVG ajustados a la referencia conceptual. La lámina PNG original aún está pendiente de incorporarse al repositorio.  
 **Última actualización:** 12 de noviembre de 2026.
 
 ## 1. Objetivo de la marca
@@ -146,15 +146,15 @@ El nombre principal siempre será **Eduardo Alvarado**. EA. es un elemento gráf
 - Preparar plantillas editables para avatar, portada y marca de agua.
 - Mantener consistencia de color y tipografía en todas las piezas.
 
-**Nota:** la lámina V2 aprobada es una referencia visual de dirección de arte; no sustituye todavía los archivos maestros vectoriales ni las plantillas finales de producción.
+**Nota:** la lámina V2 aprobada es la referencia visual maestra. Los SVG se han reconstruido siguiendo su monograma EA, composición, paleta y jerarquía; son vectores editables y pueden requerir microajustes geométricos frente al arte rasterizado original.
 
 
-## 11. Primeros archivos maestros SVG
+## 11. Archivos SVG ajustados a la identidad V2
 
-Se añadieron al repositorio tres recursos vectoriales editables:
+Se actualizaron los tres recursos vectoriales editables para aproximarlos a la lámina conceptual aprobada:
 
 - `identidad/logo-principal-v1.svg` — firma horizontal con nombre y especialidad.
 - `identidad/avatar-ea.svg` — avatar cuadrado con monograma EA.
 - `identidad/marca-de-agua-ea.svg` — versión horizontal clara para superponer en videos oscuros.
 
-**Importante:** estos SVG son una primera construcción vectorial basada en la dirección visual V2 aprobada. No son la imagen de referencia generada anteriormente ni una conversión exacta de aquella lámina. Deben revisarse visualmente y ajustarse antes de producción final. Las fuentes Montserrat y Roboto se declaran como preferidas con alternativas de sistema.
+**Importante:** los SVG ya siguen el diseño de referencia V2: monograma EA geométrico, triángulo naranja integrado en la A, punto naranja, fondo negro/marfil y jerarquía tipográfica. Son una reconstrucción vectorial editable, no un calco automático píxel a píxel. La lámina conceptual PNG debe conservarse en `identidad/referencias/` como fuente visual para futuras iteraciones. Montserrat y Roboto se declaran como preferidas con alternativas de sistema.
