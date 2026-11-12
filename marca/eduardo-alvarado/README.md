@@ -97,11 +97,12 @@ Priorizar demostraciones antes/después, consejos, procesos, errores frecuentes 
 
 ## 7. Siguientes entregables
 
-- [ ] Validar los tres SVG en tamaños reales de uso y corregir cualquier diferencia geométrica con la lámina.
+- [ ] Validar los tres SVG en tamaños reales de uso.
 - [ ] Crear versiones PNG transparentes del logotipo y la marca de agua.
 - [ ] Sustituir el retrato ilustrativo por una fotografía real.
-- [ ] Preparar exportaciones PNG de los recursos y validar su uso en CapCut.
+- [ ] Preparar exportaciones PNG de los recursos.
 - [x] Crear plantillas editables de portada TikTok, subtítulos, rótulos y elementos gráficos.
+- [x] Definir la primera versión del sistema de edición para HyperFrames + Claude.
 - [ ] Elegir usuario de TikTok y publicar la bio.
 - [ ] Producir los primeros 10 videos.
 - [ ] Definir proceso de contacto, cotización y contratación.
@@ -112,8 +113,18 @@ Priorizar demostraciones antes/después, consejos, procesos, errores frecuentes 
 - [Sistema de subtítulos y elementos gráficos](plantillas/tiktok/elementos-graficos-ea.svg)
 - [Guía de uso](plantillas/tiktok/GUIA-DE-USO.md)
 
-Las plantillas mantienen Montserrat/Roboto y la paleta oficial. Los SVG son editables y están pensados para adaptar en Figma, Illustrator, Inkscape o reconstruir en CapCut.
+Las plantillas mantienen Montserrat/Roboto y la paleta oficial. Los SVG son editables y están pensados para adaptar en Figma, Illustrator o Inkscape, y como referencia para las composiciones de HyperFrames.
 
-## 9. Regla de consistencia
+## 9. Sistema de producción HyperFrames + Claude
+
+La producción audiovisual se realizará con HyperFrames y Claude, no con CapCut. La documentación inicial está en [produccion/hyperframes](produccion/hyperframes/SISTEMA-DE-EDICION-EA.md):
+
+- [Sistema de edición EA](produccion/hyperframes/SISTEMA-DE-EDICION-EA.md)
+- [Prompt maestro para Claude](produccion/hyperframes/PROMPT-MAESTRO-CLAUDE.md)
+- [Design tokens CSS](produccion/hyperframes/design-tokens.css)
+
+Esta primera entrega define identidad, gramática de movimiento, componentes, flujo de producción y criterios de aceptación. Los presets animados se validarán con una composición piloto real antes de declararlos listos para producción.
+
+## 10. Regla de consistencia
 
 El nombre principal siempre será **Eduardo Alvarado**. EA. es un recurso gráfico secundario y no sustituye el nombre de marca. Mantener paleta, tipografías, jerarquía y estilo editorial en todas las aplicaciones.
