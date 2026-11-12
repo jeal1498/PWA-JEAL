@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">EA. — Avatar de Eduardo Alvarado</title>
+  <rect width="512" height="512" rx="256" fill="#171717"/>
+  <g fill="#F4F1EA">
+    <path d="M94 142h142v38H140v42h85v36h-85v48h101v38H94z"/>
+    <path d="m238 344 66-202h48l67 202h-48l-14-47h-58l-14 47zm72-84h37l-19-61z"/>
+  </g>
+  <path d="m320 212 34 22-34 22z" fill="#F57C00"/>
+  <circle cx="432" cy="344" r="12" fill="#F57C00"/>
+</svg>
