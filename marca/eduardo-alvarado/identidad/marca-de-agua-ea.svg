@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120" role="img" aria-labelledby="title">
+  <title id="title">EA. — Marca de agua</title>
+  <g fill="#FFFFFF">
+    <path d="M18 22h45v12H33v13h27v11H33v15h32v12H18z"/>
+    <path d="m67 85 23-63h16l23 63h-15l-5-15H87l-5 15zm24-27h14l-7-20z"/>
+  </g>
+  <path d="m98 39 12 8-12 8z" fill="#F57C00"/>
+  <circle cx="137" cy="75" r="5" fill="#F57C00"/>
+  <text x="160" y="56" fill="#FFFFFF" font-family="Montserrat, Arial, sans-serif" font-size="24" font-weight="800">EDUARDO</text>
+  <text x="160" y="83" fill="#FFFFFF" font-family="Montserrat, Arial, sans-serif" font-size="24" font-weight="800">ALVARADO.</text>
+</svg>
