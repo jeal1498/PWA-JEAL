@@ -2,7 +2,7 @@
 
 > Documento de trabajo. Esta identidad corresponde a la marca personal de Eduardo Alvarado y es independiente de Clientela y de las demás marcas/documentos que existan en `/marca`.
 
-**Estado:** dirección estratégica inicial acordada; sistema visual final pendiente.  
+**Estado:** estrategia acordada e identidad visual V2 aprobada; archivos maestros y aplicaciones finales pendientes.  
 **Última actualización:** 12 de noviembre de 2026.
 
 ## 1. Objetivo de la marca
@@ -106,3 +106,44 @@ Mezcla de contenido: demostraciones antes/después, consejos, procesos, errores 
 ## 9. Criterio de consistencia
 
 El nombre principal siempre será **Eduardo Alvarado**. EA. es un elemento gráfico secundario, no sustituye el nombre de marca. La identidad debe poder extenderse a otros servicios creativos en el futuro sin perder su asociación con Eduardo.
+
+
+## 10. Identidad visual V2 — APROBADA
+
+**Estado:** Eduardo aprobó la segunda propuesta visual el 12 de noviembre de 2026. Esta versión queda como dirección visual oficial de la marca.
+
+### Sistema visual aprobado
+
+- **Logotipo:** monograma geométrico EA. con triángulo de reproducción integrado en la A y punto naranja distintivo.
+- **Firma principal:** EDUARDO ALVARADO. El monograma EA. se utiliza como recurso secundario.
+- **Especialidad visible:** EDICIÓN Y PRODUCCIÓN AUDIOVISUAL.
+- **Lema de comunicación:** “Transformo tus grabaciones en contenido que destaca.”
+- **Estética:** editorial, minimalista, profesional y creativa; alto contraste, composición limpia y uso moderado de diagonales naranjas.
+- **Tipografía de títulos:** Montserrat.
+- **Tipografía secundaria:** Roboto.
+
+### Paleta aprobada en la propuesta V2
+
+| Color | Código |
+|---|---|
+| Negro | `#171717` |
+| Naranja | `#F57C00` |
+| Marfil | `#F4F1EA` |
+| Gris | `#77736D` |
+
+### Aplicaciones previstas
+
+1. Avatar de TikTok: monograma EA. centrado, fondo negro y acento naranja.
+2. Portadas: composición editorial, títulos legibles, fotografía o material audiovisual y acentos naranjas.
+3. Marca de agua: monograma EA. simplificado, en blanco o negro según contraste del video.
+4. Piezas de presentación: nombre completo, especialidad y lema.
+
+### Criterios de producción pendientes
+
+- Crear archivos maestros vectoriales del logotipo (SVG/PDF) y versiones PNG transparentes.
+- Validar legibilidad del monograma en tamaños pequeños y en fondos claros/oscuros.
+- Sustituir el retrato ilustrativo de los mockups por una fotografía real de Eduardo.
+- Preparar plantillas editables para avatar, portada y marca de agua.
+- Mantener consistencia de color y tipografía en todas las piezas.
+
+**Nota:** la lámina V2 aprobada es una referencia visual de dirección de arte; no sustituye todavía los archivos maestros vectoriales ni las plantillas finales de producción.
