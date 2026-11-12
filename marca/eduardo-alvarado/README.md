@@ -147,3 +147,14 @@ El nombre principal siempre será **Eduardo Alvarado**. EA. es un elemento gráf
 - Mantener consistencia de color y tipografía en todas las piezas.
 
 **Nota:** la lámina V2 aprobada es una referencia visual de dirección de arte; no sustituye todavía los archivos maestros vectoriales ni las plantillas finales de producción.
+
+
+## 11. Primeros archivos maestros SVG
+
+Se añadieron al repositorio tres recursos vectoriales editables:
+
+- `identidad/logo-principal-v1.svg` — firma horizontal con nombre y especialidad.
+- `identidad/avatar-ea.svg` — avatar cuadrado con monograma EA.
+- `identidad/marca-de-agua-ea.svg` — versión horizontal clara para superponer en videos oscuros.
+
+**Importante:** estos SVG son una primera construcción vectorial basada en la dirección visual V2 aprobada. No son la imagen de referencia generada anteriormente ni una conversión exacta de aquella lámina. Deben revisarse visualmente y ajustarse antes de producción final. Las fuentes Montserrat y Roboto se declaran como preferidas con alternativas de sistema.
