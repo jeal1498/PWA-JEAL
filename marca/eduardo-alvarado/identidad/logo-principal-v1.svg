@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Eduardo Alvarado — EA.</title>
+  <desc id="desc">Logotipo editorial en negro, marfil y naranja para edición y producción audiovisual.</desc>
+  <rect width="1200" height="360" fill="#F4F1EA"/>
+  <g fill="#171717">
+    <path d="M72 92h118v30h-82v35h72v29h-72v39h84v30H72z"/>
+    <path d="M211 255 275 92h40l65 163h-40l-13-36h-64l-13 36zm62-68h43l-21-60z"/>
+  </g>
+  <path d="M292 162 321 181 292 200z" fill="#F57C00"/>
+  <circle cx="390" cy="239" r="9" fill="#F57C00"/>
+  <text x="455" y="157" fill="#171717" font-family="Montserrat, Arial, sans-serif" font-size="64" font-weight="800" letter-spacing="1">EDUARDO</text>
+  <text x="455" y="225" fill="#171717" font-family="Montserrat, Arial, sans-serif" font-size="64" font-weight="800" letter-spacing="1">ALVARADO.</text>
+  <rect x="458" y="253" width="64" height="5" rx="2.5" fill="#F57C00"/>
+  <text x="542" y="263" fill="#77736D" font-family="Roboto, Arial, sans-serif" font-size="22" font-weight="500" letter-spacing="2">EDICIÓN Y PRODUCCIÓN AUDIOVISUAL</text>
+</svg>
