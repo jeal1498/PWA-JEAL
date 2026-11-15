@@ -124,3 +124,7 @@ Nombre nuevo de **Cartera de clientes**. Usuario: **Eduardo** (Lalo, hombre). Pl
 ## Ideas pendientes
 - Captura rápida (anotar en 1 toque y luego convertir en nota/pendiente): propuesta, no elegida aún.
 - Leer tickets de gas por foto (hoy ella manda fotos y se genera el JSON a mano).
+
+## Widgets (`widgets/`, 14-nov-2026)
+- `widgets/SmartAppWidget/`: app Android nativa (Kotlin, Gradle, minSdk 26) «Apps al momento»: widget transparente con GridView + RemoteViewsService (scroll real), motor local de recomendaciones (UsageStatsManager + Room), Compose para ajustes. Ver su README/PRUEBAS. APK en `widgets/apk/`.
+- Compilar: Android SDK en `/opt/android-sdk` (se instala con cmdline-tools), `./gradlew assembleRelease testDebugUnitTest`. Repos con espejo de Maven Central de Google (evita 429).
