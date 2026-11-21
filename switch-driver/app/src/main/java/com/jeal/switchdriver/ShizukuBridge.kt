@@ -98,6 +98,8 @@ object ShizukuBridge {
             DiagLog.add("Servicio privilegiado ${if (s != null) "conectado" else "no respondió"}")
             pending?.complete(s)
         }
+        override fun onNullBinding(name: ComponentName?) { DiagLog.add("UserService: binding nulo"); pending?.complete(null) }
+        override fun onBindingDied(name: ComponentName?) { DiagLog.add("UserService: murió el binding"); svc = null; serviceBound.value = false; pending?.complete(null) }
         override fun onServiceDisconnected(name: ComponentName?) {
             DiagLog.add("Servicio privilegiado desconectado")
             svc = null; serviceBound.value = false
@@ -126,6 +128,11 @@ object ShizukuBridge {
         if (compute() != ShizukuState.READY) return null
         val d = CompletableDeferred<IUserService?>(); pending = d
         try { Shizuku.bindUserService(args, conn) } catch (t: Throwable) { DiagLog.add("bindUserService: ${t.message}"); return null }
-        withTimeoutOrNull(8000) { d.await() }
+        val got = withTimeoutOrNull(8000) { d.await() }
+        if (got == null) {
+            DiagLog.add("UserService: sin respuesta en 8 s (Android ${android.os.Build.VERSION.SDK_INT}, ${android.os.Build.MODEL})")
+            try { Shizuku.unbindUserService(args, conn, true) } catch (_: Throwable) {} // limpia para reintentar
+        }
+        got
     }
 }

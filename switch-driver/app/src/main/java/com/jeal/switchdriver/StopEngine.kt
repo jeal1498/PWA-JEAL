@@ -48,11 +48,14 @@ object StopEngine {
             val st = ShizukuBridge.ensureReady()
             if (!st.ok) return StopResult.Unavailable("${st.title}. ${st.help}")
             return withContext(Dispatchers.IO) {
-                val svc = ShizukuBridge.service() ?: return@withContext StopResult.Unavailable("No se pudo conectar con Shizuku. Reinicia el servicio e inténtalo de nuevo.")
                 val user = Process.myUserHandle().hashCode() // id de usuario (0 en el perfil principal)
+                val svc = ShizukuBridge.service()
+                // Si el UserService no conecta (pasa en algunos equipos), se usa el proceso directo de Shizuku:
+                // mismas reglas, mismo comando validado, misma verificación.
+                if (svc == null) DiagLog.add("UserService sin conexión: usando método directo de Shizuku")
                 try {
-                    if (svc.isStopped(pkg, user) == 1) return@withContext StopResult.AlreadyStopped
-                    val out = svc.forceStop(pkg, user)
+                    if ((svc?.isStopped(pkg, user) ?: PrivOps.isStopped(PrivOps.viaShizuku, pkg, user)) == 1) return@withContext StopResult.AlreadyStopped
+                    val out = svc?.forceStop(pkg, user) ?: PrivOps.forceStop(PrivOps.viaShizuku, app.packageName, pkg, user)
                     when {
                         out == "VERIFIED" -> StopResult.Stopped
                         out.startsWith("UNVERIFIED:") -> StopResult.Unverified(out.removePrefix("UNVERIFIED:"))
