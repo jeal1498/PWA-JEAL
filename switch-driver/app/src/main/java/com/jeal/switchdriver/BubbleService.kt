@@ -187,8 +187,9 @@ class BubbleService : Service() {
             scheduleIdle()
         }
         e.view.onTap = {
-            if (e.minimized) { setMinimized(e, false); scheduleIdle() } // primer toque en una minimizada solo la despliega
-            else onBubbleTap(e)
+            // Un solo toque detiene la app, aunque la burbuja esté minimizada (también la despliega).
+            if (e.minimized) setMinimized(e, false)
+            onBubbleTap(e)
         }
     }
 

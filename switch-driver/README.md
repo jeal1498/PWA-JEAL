@@ -1,6 +1,6 @@
 # Switch Driver
 
-APK Android nativa (Kotlin + Compose, sin root) que **detiene (Force Stop) solo las apps que eliges** usando [Shizuku](https://shizuku.rikka.app/): pensada para conductores que usan Uber, DiDi u otras a la vez. `minSdk 26` · `targetSdk 35` · v1.0.2 · APK: `apk/switch-driver-1.0.2.apk` (firmada con llave de depuración).
+APK Android nativa (Kotlin + Compose, sin root) que **detiene (Force Stop) solo las apps que eliges** usando [Shizuku](https://shizuku.rikka.app/): pensada para conductores que usan Uber, DiDi u otras a la vez. `minSdk 26` · `targetSdk 35` · v1.0.3 · APK: `apk/switch-driver-1.0.3.apk` (firmada con llave de depuración).
 
 ## Reglas que cumple el código
 - Solo `am force-stop` de **un** paquete validado (`Validation.isPackageName`), con argumentos en lista (sin shell, sin comandos libres). No abre apps, no cierra sesiones, no borra datos/caché.
@@ -21,7 +21,7 @@ APK Android nativa (Kotlin + Compose, sin root) que **detiene (Force Stop) solo 
 | `MainActivity.kt`, `Screens.kt`, `Theme.kt` | 5 pantallas: Inicio, Apps, Protegidas, Burbujas, Ajustes (oscuro) |
 
 ## Burbujas
-Una por app elegida; arrastrables (se pegan al borde, recuerdan posición), tamaño 32–80 dp, transparencia, borde preferido, minimizar al borde tras 4 s (el primer toque en una minimizada **solo la despliega**), ocultar/restaurar (también desde la notificación). El toque llama a `StopEngine` con el paquete de **esa** burbuja; aro verde/ámbar/rojo + toast breve. Sin permiso «Mostrar sobre otras apps» no se finge nada: aviso + botón. El servicio no hace nada por sí solo.
+Una por app elegida; arrastrables (se pegan al borde, recuerdan posición), tamaño 32–80 dp, transparencia, borde preferido, minimizar al borde tras 4 s (un toque sobre una minimizada también detiene la app y la despliega), ocultar/restaurar (también desde la notificación). El toque llama a `StopEngine` con el paquete de **esa** burbuja; aro verde/ámbar/rojo + toast breve. Sin permiso «Mostrar sobre otras apps» no se finge nada: aviso + botón. El servicio no hace nada por sí solo.
 
 ## Widget
 Estado de Shizuku con hora de última actualización, hasta 4 botones por app y «Detener seleccionadas (N)», que pide **segundo toque en 5 s** como confirmación del lote. Receptor no exportado; sin abrir la app.
