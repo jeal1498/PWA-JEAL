@@ -1,6 +1,6 @@
 # Switch Driver
 
-APK Android nativa (Kotlin + Compose, sin root) que **detiene (Force Stop) solo las apps que eliges** usando [Shizuku](https://shizuku.rikka.app/): pensada para conductores que usan Uber, DiDi u otras a la vez. `minSdk 26` · `targetSdk 35` · v1.0.1 · APK: `apk/switch-driver-1.0.1.apk` (firmada con llave de depuración).
+APK Android nativa (Kotlin + Compose, sin root) que **detiene (Force Stop) solo las apps que eliges** usando [Shizuku](https://shizuku.rikka.app/): pensada para conductores que usan Uber, DiDi u otras a la vez. `minSdk 26` · `targetSdk 35` · v1.0.2 · APK: `apk/switch-driver-1.0.2.apk` (firmada con llave de depuración).
 
 ## Reglas que cumple el código
 - Solo `am force-stop` de **un** paquete validado (`Validation.isPackageName`), con argumentos en lista (sin shell, sin comandos libres). No abre apps, no cierra sesiones, no borra datos/caché.

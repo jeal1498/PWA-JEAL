@@ -41,7 +41,7 @@ object PrivOps {
         val end = System.currentTimeMillis() + timeoutMs
         var code: Int? = null
         while (System.currentTimeMillis() < end) {
-            try { code = p.exitValue(); break } catch (_: IllegalThreadStateException) { Thread.sleep(40) }
+            try { code = p.exitValue(); break } catch (_: Throwable) { Thread.sleep(40) } // local: IllegalThreadStateException; remoto de Shizuku: IllegalArgumentException
         }
         if (code == null) { try { p.destroy() } catch (_: Throwable) {}; return null }
         reader.join(1500)
