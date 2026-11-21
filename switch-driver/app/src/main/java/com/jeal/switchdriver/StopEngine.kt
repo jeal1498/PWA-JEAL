@@ -33,8 +33,9 @@ object StopEngine {
     suspend fun stop(ctx: Context, pkg: String, via: String): StopResult {
         val app = ctx.applicationContext
         val label = Catalog.labelOf(app, pkg)
+        val t0 = System.currentTimeMillis()
         val res = run(app, pkg)
-        DiagLog.add("[$via] $label ($pkg) → ${describe(res)}")
+        DiagLog.add("[$via] $label ($pkg) → ${describe(res)} · ${System.currentTimeMillis() - t0} ms")
         return res
     }
 
@@ -54,7 +55,6 @@ object StopEngine {
                 // mismas reglas, mismo comando validado, misma verificación.
                 if (svc == null) DiagLog.add("UserService sin conexión: usando método directo de Shizuku")
                 try {
-                    if ((svc?.isStopped(pkg, user) ?: PrivOps.isStopped(PrivOps.viaShizuku, pkg, user)) == 1) return@withContext StopResult.AlreadyStopped
                     val out = svc?.forceStop(pkg, user) ?: PrivOps.forceStop(PrivOps.viaShizuku, app.packageName, pkg, user)
                     when {
                         out == "VERIFIED" -> StopResult.Stopped

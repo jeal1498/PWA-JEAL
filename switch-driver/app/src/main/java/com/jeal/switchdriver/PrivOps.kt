@@ -21,12 +21,14 @@ object PrivOps {
         val r = exec(listOf("/system/bin/am", "force-stop", "--user", userId.toString(), pkg!!), 10_000)
             ?: return "FAIL:el comando no respondió"
         if (r.first != 0) return "FAIL:am salió con ${r.first} ${r.second.trim().take(160)}"
-        repeat(6) {
-            if (isStopped(exec, pkg, userId) == 1) return "VERIFIED"
-            Thread.sleep(200)
+        // Una sola lectura normalmente basta: am force-stop es síncrono y ya dejó la bandera. Reintentos rápidos si no.
+        repeat(4) {
+            val st = isStopped(exec, pkg, userId)
+            if (st == 1) return "VERIFIED"
+            if (st == -1) return "UNVERIFIED:no se pudo leer el estado"
+            Thread.sleep(80)
         }
-        return if (isStopped(exec, pkg, userId) == 0) "UNVERIFIED:el sistema sigue sin marcarla detenida (¿se reinició sola?)"
-        else "UNVERIFIED:no se pudo leer el estado"
+        return "UNVERIFIED:el sistema sigue sin marcarla detenida (¿se reinició sola?)"
     }
 
     /** Lee la salida de un proceso con tiempo límite. */
